@@ -27,7 +27,7 @@ mkdir express-backend
 abrir directorio
 cd express-backend
 
-ejecutar npm para crear .json para el npm
+ejecutar este comando para crear package.json para usar el gestor de paquetes npm
 npm init -y
 
 instalar

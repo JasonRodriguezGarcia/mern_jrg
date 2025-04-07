@@ -1,0 +1,100 @@
+crear directorio mern
+
+abrirlo con VSC
+dentro del directorio /mern
+ejecutar en la consola para instalar React:
+
+npx create-react-app react-frontend
+abrir react-frontend
+cd react-frontend
+
+instalar MUI con
+
+npm install @mui/material @emotion/react @emotion/styled
+npm install @fontsource/roboto
+npm install @mui/icons-material
+
+probar que funciona
+npm start
+
+cerrar con CRTL+C
+subir un directorio (osea ir a mern)
+cd..
+
+crear directorio para el backend
+mkdir express-backend
+
+abrir directorio
+cd express-backend
+
+ejecutar npm para crear .json para el npm
+npm init -y
+
+instalar
+npm install express
+npm install --save-dev nodemon // para que al cambiar código se ejecture express de nuevo
+npm install cors
+
+en el package.json
+"type": "module",
+"scripts": {
+    "start": "node index.js", // ojo en los apuntes pone "node server/server.js"
+    "dev": "nodemon index.js"  // ojo en los apuntes pone "nodemon server/server.js"
+
+  },
+
+crear index.js con:
+
+import express from "express";
+import path from "path";
+import cors from 'cors';
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// API Route Example
+app.get("/api/message", (req, res) => {
+  res.json({ message: "Hello from Express!" });
+});
+
+// **OPCIONAL**
+// Serve React Frontend 
+//app.use(express.static(path.join(__dirname, "../build")));
+
+//app.get("*", (req, res) => {
+//  res.sendFile(path.join(__dirname, "../build", "index.html"));
+//});
+// **END OPCIONAL**
+
+// Start Server
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
+
+
+Ejectuarlo express
+npm run dev
+
+
+en cmd ejecutar curl para llamar a apis
+curl -X GET localhost:5000/api/v1/users
+
+curl -X POST localhost:5000/api/v1/users
+
+
+C:\Users\alu01>curl -X GET localhost:5000/api/v1/users/1
+	{"id":1,"nombre":"Pepe","edad":31}
+C:\Users\alu01>curl -X GET localhost:5000/api/v1/users/111
+	{"error":"No existe el usuario"}
+
+curl -X POST localhost:5000/api/v1/users -H "Content-Type: application/json" -d "{\"id\": 44, \"nombre\": \"Juanin\", \"edad\": 33}"
+
+curl -X DELETE localhost:5000/api/v1/coches/1

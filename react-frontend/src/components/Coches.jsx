@@ -66,7 +66,8 @@ const Coches = () => {
             resultado = data
             if (resultado) {
                 console.log("coche borrado:", resultado)
-                setSelectedActionMessage("View Car Data")
+                setSelectedActionMessage("Delete Car")
+
             }
         })
     }

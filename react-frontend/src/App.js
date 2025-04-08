@@ -1,31 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
-import MessageComponent from './components/MessageComponent';
-import Coches from './components/Coches';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/coches/HomePage';
+// import UserListPage from './pages/users/UserListPage';
+// import UserFormInsertPage from './pages/users/UserFormInsertPage';
+import CochesListPage from './pages/coches/CochesListPage';
+import CochesFormInsertPage from './pages/coches/CochesFormInsertPage';
+
 
 function App() {
   return (
-    <div className="App">
-
-      {/* <MessageComponent /> */}
-
-      <Coches />
-
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/cars" element={<CochesListPage />} />
+        {/* <Route path="/users/:id/edit" element={<CochesFormEditPage />} />  No implementado */}
+        <Route path="/cars/new" element={<CochesFormInsertPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

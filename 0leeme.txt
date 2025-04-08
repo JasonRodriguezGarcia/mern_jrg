@@ -89,12 +89,35 @@ curl -X GET localhost:5000/api/v1/users
 
 curl -X POST localhost:5000/api/v1/users
 
-
+********Ojo en las cadenas CURL LAS COMILLAS " SE PONDRÁN COMO \" ************
 C:\Users\alu01>curl -X GET localhost:5000/api/v1/users/1
 	{"id":1,"nombre":"Pepe","edad":31}
 C:\Users\alu01>curl -X GET localhost:5000/api/v1/users/111
 	{"error":"No existe el usuario"}
+********************************
 
 curl -X POST localhost:5000/api/v1/users -H "Content-Type: application/json" -d "{\"id\": 44, \"nombre\": \"Juanin\", \"edad\": 33}"
 
 curl -X DELETE localhost:5000/api/v1/coches/1
+
+En React instalar
+npm install react-router-dom@6
+
+En Express instalar
+npm install pouchdb
+
+EN CURL
+para añadir
+curl -X POST localhost:5000/api/v1/users -H "Content-Type: application/json" -d "{\"nombre\": \"olga\", \"edad\": 33}"
+
+para listar
+curl -X GET localhost:5000/api/v1/users
+
+añadiendo con nuevo atributo email
+curl -X POST localhost:5000/api/v1/users -H "Content-Type: application/json" -d "{\"nombre\": \"Maria\", \"edad\": 28, \"email\": \"maria@gmail.com\"}"
+
+borrando
+curl -X DELETE localhost:5000/api/v1/users/6d9dc351-2385-4e5c-85e0-87bd4ecbbd81
+
+modificando
+curl -X PUT localhost:5000/api/v1/users/6ea84726-cc95-443d-95ae-d7690c915867 -H "Content-Type: application/json" -d "{\"nombre\": \"Maria\", \"edad\": 41, \"email\": \"mariadelahoz@gmail.com\"}"

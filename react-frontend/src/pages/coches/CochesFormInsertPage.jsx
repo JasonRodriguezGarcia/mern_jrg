@@ -1,0 +1,76 @@
+import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Button, Box, TextField } from '@mui/material';
+
+function CochesFormInsertPage() {
+  const [marca, setMarca] = useState('')
+  const [ano, setAno] = useState('')
+
+
+    const navigate = useNavigate();
+
+    const goToHome = () => {
+      navigate("/");
+  }
+  const handleFormSubmit = async (e) => {
+    e.preventDefault()
+
+    // crear user con datos de inputs
+    const coche = {
+      marca: marca,
+      ano: ano
+    }
+
+      // fetch POST y pasar user como cuerpo (body)
+      const response = await fetch('http://localhost:5000/api/v1/cars',
+        {
+          method: 'POST',
+          headers: {'Content-type': 'application/json; charset=UTF-8'},
+          body: JSON.stringify(coche)
+
+        }
+      );
+
+      setMarca("")
+      setAno("")
+    console.log("Mandar fetch")
+}
+
+
+
+  return (
+    <div>
+      <h2>Welcome User Form Insert Peich</h2>
+
+      {/* UN BOX QUE ACTUA COMO UN FORMULARIO */}
+      <Box component="form" onSubmit={handleFormSubmit}
+                sx={{
+                  width: 300,
+                  height: 300,
+                  borderRadius: 1,
+                  display: "flex",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  gap: 4,
+                  p: 2
+                }}
+      >
+
+        <TextField id="marca" label="Marca" variant="outlined" onChange={(e)=> setMarca(e.target.value)}/>
+        <TextField id="ano" label="Año" variant="filled" onChange={(e)=> setAno(e.target.value)}/>
+
+        <Button type="submit" variant="contained" color="primary">
+          Guardar
+        </Button>
+
+
+
+      </Box>
+
+      <Button variant="contained" color="primary" onClick={goToHome}>
+        Home
+      </Button>
+    </div>
+  );
+}
+export default CochesFormInsertPage;

@@ -121,7 +121,7 @@ const Coches = () => {
             </Dialog>
         
 
-            <TableContainer component={Paper}>
+            {/* <TableContainer component={Paper}> */}
                 <Table sx={{ minWidth: 200 }} aria-label="simple table">
                     <TableHead>
                     <TableRow>
@@ -156,7 +156,7 @@ const Coches = () => {
                         ))}
                     </TableBody>
                 </Table>
-            </TableContainer>
+            {/* </TableContainer> */}
 
         </>
     )

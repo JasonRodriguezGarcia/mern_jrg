@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Box, TextField } from '@mui/material';
+import { useParams } from 'react-router-dom';
 
-function CochesFormInsertPage() {
+function CarsFormModifyPage() {
     const [marca, setMarca] = useState('')
     const [modelo, setModelo] = useState('')
     const [ano, setAno] = useState('')
 
+    const {id} = useParams()
+    // const navigate = useNavigate();
 
-    const navigate = useNavigate();
 
     const goToHome = () => {
       navigate("/");
@@ -77,4 +79,4 @@ function CochesFormInsertPage() {
     </div>
   );
 }
-export default CochesFormInsertPage;
+export default CarsFormModifyPage;

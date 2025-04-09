@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import CarsListComponent from '../../components/CarsListComponent';
 
-function CochesListPage() {
+function CarsListPage() {
 
   const navigate = useNavigate();
 
@@ -19,6 +19,7 @@ function CochesListPage() {
       <Button variant="contained" color="primary" onClick={goToNewCar}>
         Crear Coche
       </Button>
+      
       <CarsListComponent />
 
       <Button variant="contained" color="primary" onClick={goToHome}>
@@ -27,4 +28,4 @@ function CochesListPage() {
     </div>
   );
 }
-export default CochesListPage;
+export default CarsListPage;

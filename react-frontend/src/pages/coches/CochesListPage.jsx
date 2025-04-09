@@ -9,14 +9,14 @@ function CochesListPage() {
   const goToHome = () => {
     navigate("/");
   }
-  const goToNewUser = () => {
+  const goToNewCar = () => {
       navigate("/cars/new");
   }
 
   return (
     <div>
       <h2>Welcome User List Peich</h2>
-      <Button variant="contained" color="primary" onClick={goToNewUser}>
+      <Button variant="contained" color="primary" onClick={goToNewCar}>
         Crear Coche
       </Button>
       <CarsListComponent />

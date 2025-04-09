@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
 const CarsListComponent = () => {
   const [cars, setCars] = useState([]); // Set initial state to an empty array
   const [loading, setLoading] = useState(true); // Track loading state
   const [error, setError] = useState(null); // Track error state
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Define an async function to fetch the cars
@@ -26,27 +29,39 @@ const CarsListComponent = () => {
     fetchCars(); // Call the async function
   }, []); // Empty dependency array, so it runs once when the component mounts
 
+    const goToViewCar = () => {
+        // navigate("/cars/view");
+        alert("Enviar a ViewCar")
+    }
+
+    const goToNewCar = () => {
+        navigate("/cars/new");
+    }
+
+
   // Render loading, error, or the list of cars
-  return (
-    <div>
-      <h1>Cars from Express:</h1>
-      {loading && <p>Loading...</p>} {/* Show loading if data is being fetched */}
-      {error && <p>Error: {error}</p>} {/* Show error message if there was an error */}
-      {!loading && !error && (
-        <ul>
-          {cars.map(car => (
-            <li key={car.id}>
-              <Button sx={{ backgroundColor: "white", color: "white", width: 1 }}>🔎</Button>
-              <Button sx={{ backgroundColor: "white", color: "white" }}>➕</Button>
-              <Button sx={{ backgroundColor: "white", color: "white" }}>✏️</Button>
-              <Button sx={{ backgroundColor: "white", color: "white" }}>❌</Button>
-              {car.marca} - {car.modelo} - {car.ano} - {car.type}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
+    return (
+        <div>
+        <h1>Cars from Express:</h1>
+        {loading && <p>Loading...</p>} {/* Show loading if data is being fetched */}
+        {error && <p>Error: {error}</p>} {/* Show error message if there was an error */}
+        {!loading && !error && (
+            cars.map((car, key) => (
+                <p key={key}>
+                    <Button title="Mostrar" sx={{ backgroundColor: "green", color: "white", fontSize: "20px"}}
+                         onClick={goToViewCar}
+                         >🔎</Button>
+                    <Button title="Crear" sx={{ backgroundColor: "green", color: "white", fontSize: "20px"}}
+                         onClick={goToNewCar}
+                    >➕</Button>
+                    <Button title="Editar" sx={{ backgroundColor: "green", color: "white", fontSize: "20px"}}>✏️</Button>
+                    <Button title="Borrar" sx={{ backgroundColor: "red", color: "white", fontSize: "20px"}}>❌</Button>
+                    {car.marca} - {car.modelo} - {car.ano} - {car.type}
+                </p>
+            ))
+        )}
+        </div>
+    );
 };
 
 export default CarsListComponent;

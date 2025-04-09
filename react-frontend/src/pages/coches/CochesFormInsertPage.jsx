@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Box, TextField } from '@mui/material';
 
 function CochesFormInsertPage() {
-  const [marca, setMarca] = useState('')
-  const [ano, setAno] = useState('')
+    const [marca, setMarca] = useState('')
+    const [modelo, setModelo] = useState('')
+    const [ano, setAno] = useState('')
 
 
     const navigate = useNavigate();
@@ -17,8 +18,9 @@ function CochesFormInsertPage() {
 
     // crear user con datos de inputs
     const coche = {
-      marca: marca,
-      ano: ano
+        marca: marca,
+        modelo: modelo,
+        ano: ano
     }
 
       // fetch POST y pasar user como cuerpo (body)
@@ -32,6 +34,7 @@ function CochesFormInsertPage() {
       );
 
       setMarca("")
+      setModelo("")
       setAno("")
     console.log("Mandar fetch")
 }
@@ -44,19 +47,20 @@ function CochesFormInsertPage() {
 
       {/* UN BOX QUE ACTUA COMO UN FORMULARIO */}
       <Box component="form" onSubmit={handleFormSubmit}
-                sx={{
-                  width: 300,
-                  height: 300,
-                  borderRadius: 1,
-                  display: "flex",
-                  justifyContent: "center",
-                  flexDirection: "column",
-                  gap: 4,
-                  p: 2
-                }}
+        sx={{
+            width: 300,
+            height: 300,
+            borderRadius: 1,
+            display: "flex",
+            justifyItems: "center",
+            flexDirection: "column",
+            gap: 4,
+            p: 2
+        }}
       >
 
         <TextField id="marca" label="Marca" variant="outlined" onChange={(e)=> setMarca(e.target.value)}/>
+        <TextField id="modelo" label="Modelo" variant="outlined" onChange={(e)=> setModelo(e.target.value)}/>
         <TextField id="ano" label="Año" variant="filled" onChange={(e)=> setAno(e.target.value)}/>
 
         <Button type="submit" variant="contained" color="primary">

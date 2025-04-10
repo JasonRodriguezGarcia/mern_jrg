@@ -17,7 +17,7 @@ function CarsListPage() {
     <div>
       <h2>Welcome User List Peich</h2>
       <Button variant="contained" color="primary" onClick={goToNewCar}>
-        Crear Coche
+        Create Car
       </Button>
       
       <CarsListComponent />

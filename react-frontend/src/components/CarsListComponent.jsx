@@ -124,7 +124,7 @@ const handleDelete = (id) => {
               <DialogActions>
                   {/* <Button onClick={()=> setOpenViewDialog(false)}>Disagree</Button> */}
                   <Button onClick={()=> handleDelete(carToDelete._id)} autoFocus>
-                      Borrar
+                      Delete
                   </Button>
                   <Button onClick={()=> setOpenViewDialog(false)} autoFocus>
                       Cancel
@@ -136,10 +136,10 @@ const handleDelete = (id) => {
             <TableHead>
             <TableRow>
                 {/* <TableCell>Marca</TableCell> */}
-                <TableCell align="right" sx={{fontSize: "20px"}}>Marca</TableCell>
-                <TableCell align="right" sx={{fontSize: "20px"}}>Modelo</TableCell>
-                <TableCell align="right" sx={{fontSize: "20px"}}>Año&nbsp;(?)</TableCell>
-                <TableCell align="right" sx={{fontSize: "20px"}}>Acción</TableCell>
+                <TableCell align="right" sx={{fontSize: "20px"}}>Branch</TableCell>
+                <TableCell align="right" sx={{fontSize: "20px"}}>Model</TableCell>
+                <TableCell align="right" sx={{fontSize: "20px"}}>Year&nbsp;(?)</TableCell>
+                <TableCell align="right" sx={{fontSize: "20px"}}>Action</TableCell>
             </TableRow>
             </TableHead>
             <TableBody>

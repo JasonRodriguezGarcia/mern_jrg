@@ -91,12 +91,12 @@ function CarsFormModifyPage() {
         }}
       >
 
-        <TextField id="marca" value={marca} label="Marca" variant="outlined" onChange={(e)=> setMarca(e.target.value)}/>
-        <TextField id="modelo" value={modelo} label="Modelo" variant="outlined" onChange={(e)=> setModelo(e.target.value)}/>
-        <TextField id="ano" value={ano} label="Año" variant="filled" onChange={(e)=> setAno(e.target.value)}/>
+        <TextField id="marca" value={marca} label="Branch" variant="outlined" onChange={(e)=> setMarca(e.target.value)}/>
+        <TextField id="modelo" value={modelo} label="Model" variant="outlined" onChange={(e)=> setModelo(e.target.value)}/>
+        <TextField id="ano" value={ano} label="Year" variant="filled" onChange={(e)=> setAno(e.target.value)}/>
 
         <Button type="submit" variant="contained" color="primary">
-          Guardar
+          Save
         </Button>
 
 

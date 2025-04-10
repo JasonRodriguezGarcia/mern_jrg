@@ -56,12 +56,12 @@ function CarsFormInsertPage() {
         }}
       >
 
-        <TextField id="marca" label="Marca" variant="outlined" onChange={(e)=> setMarca(e.target.value)}/>
-        <TextField id="modelo" label="Modelo" variant="outlined" onChange={(e)=> setModelo(e.target.value)}/>
-        <TextField id="ano" label="Año" variant="filled" onChange={(e)=> setAno(e.target.value)}/>
+        <TextField id="marca" label="Branch" variant="outlined" onChange={(e)=> setMarca(e.target.value)}/>
+        <TextField id="modelo" label="Model" variant="outlined" onChange={(e)=> setModelo(e.target.value)}/>
+        <TextField id="ano" label="Year" variant="filled" onChange={(e)=> setAno(e.target.value)}/>
 
         <Button type="submit" variant="contained" color="primary">
-          Guardar
+          Save
         </Button>
 
 

@@ -15,7 +15,7 @@ function DescriptionsListPage() {
 
   return (
     <div>
-      <h2>Welcome to Descriptions</h2>
+      <h1>Welcome to Descriptions</h1>
       <Button variant="contained" color="primary" onClick={goToNewCar}>
         Create descriptions
       </Button>

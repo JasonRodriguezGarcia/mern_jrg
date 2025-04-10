@@ -8,9 +8,9 @@ import CarsFormInsertPage from './pages/coches/CarsFormInsertPage';
 import CarsView from './pages/coches/CarsView';
 import CarsFormModifyPage from './pages/coches/CarsFormModifyPage';
 
-import DescriptionsListPage from './pages/descripcions/DescriptionsListPage';
-import DescriptionsFormInsertPage from './pages/descripcions/DescriptionsFormInsertPage';
-import DescriptionsView from './pages/descripcions/DescriptionsView';
+import DescriptionsListPage from './pages/descriptions/DescriptionsListPage';
+import DescriptionsFormInsertPage from './pages/descriptions/DescriptionsFormInsertPage';
+import DescriptionsView from './pages/descriptions/DescriptionsView';
 
 
 

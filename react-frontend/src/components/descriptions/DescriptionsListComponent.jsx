@@ -32,7 +32,7 @@ const DescriptionsListComponent = () => {
   const [openViewDialog, setOpenViewDialog] = useState(false);
   const [closeViewDialog, setCloseViewDialog] = useState(true)
   const [selectedCar, setSelectedCar] = useState({})
-  const [carToDelete, setCarToDelete] = useState({})
+  const [descriptionToDelete, setDescriptionToDelete] = useState({})
   const [selectedActionMessage, setSelectedActionMessage] = useState("")
 
   const navigate = useNavigate();
@@ -72,7 +72,7 @@ const handleDialog = async (id) => {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      setCarToDelete(data); // Set the descriptions to delete
+      setDescriptionToDelete(data); // Set the descriptions to delete
     } catch (error) {
       setError(error.message); // Handle errors
     } finally {
@@ -104,7 +104,7 @@ const handleDelete = (id) => {
   // Render loading, error, or the list of descriptions
     return (
         <div>
-          <h1>Descriptions:</h1>
+          <h2>Descriptions:</h2>
           <Dialog
               open={openViewDialog}
               onClose={()=> setOpenViewDialog(false)}
@@ -112,19 +112,18 @@ const handleDelete = (id) => {
               aria-describedby="alert-dialog-description"
           >
               <DialogTitle id="viewDescription-dialog-title">
-                  <h2>Delete Car?</h2>
+                  <h2>Delete Description?</h2>
               </DialogTitle>
               <DialogContent>
                   <DialogContentText id="alert-dialog-description">
-                      Id: {carToDelete._id}<br />
-                      Marca: {carToDelete.marca}<br />
-                      Modelo: {carToDelete.modelo}<br />
-                      Año fabricación: {carToDelete.ano}
+                      Image: {descriptionToDelete.picture}<br />
+                      Student's name: {descriptionToDelete.name}<br />
+                      Description: {descriptionToDelete.description}<br />
                   </DialogContentText>
               </DialogContent>
               <DialogActions>
                   {/* <Button onClick={()=> setOpenViewDialog(false)}>Disagree</Button> */}
-                  <Button onClick={()=> handleDelete(carToDelete._id)} autoFocus>
+                  <Button onClick={()=> handleDelete(descriptionToDelete._id)} autoFocus>
                       Delete
                   </Button>
                   <Button onClick={()=> setOpenViewDialog(false)} autoFocus>
@@ -138,7 +137,7 @@ const handleDelete = (id) => {
             <TableRow>
                 {/* <TableCell>Marca</TableCell> */}
                 <TableCell align="right" sx={{fontSize: "20px"}}>Image</TableCell>
-                <TableCell align="right" sx={{fontSize: "20px"}}>Description</TableCell>
+                <TableCell align="right" sx={{fontSize: "20px"}}>Image description</TableCell>
                 <TableCell align="right" sx={{fontSize: "20px"}}>Name</TableCell>
                 <TableCell align="right" sx={{fontSize: "20px"}}>Date</TableCell>
                 <TableCell align="right" sx={{fontSize: "20px"}}>Action</TableCell>

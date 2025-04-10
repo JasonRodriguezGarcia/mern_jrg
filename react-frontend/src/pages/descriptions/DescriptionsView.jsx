@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Box, TextField } from '@mui/material';
 import { useParams } from 'react-router-dom';
+import Typography from '@mui/material/Typography';
 // para dialog
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -59,12 +60,16 @@ function DescriptionsView() {
               {selectedActionMessage} <h2>Description details</h2>
           </DialogTitle>
           <DialogContent>
-              <DialogContentText id="alert-dialog-description">
+              <DialogContentText id="alert-dialog-description" sx={{display: "flex", flexDirection: "column", gap: "10px"}}>
                   <Box component="img"
                     src={`../../../assets/${selectedDescription.picture}.jpg`} sx={{with: "350px", height: "350px"}} 
                   />
-                  Student Name: {selectedDescription.student} <br />
-                  Descripcion: {selectedDescription.description}
+                  <Typography>
+                    Student Name: {selectedDescription.name}
+                  </Typography>
+                  <Typography>
+                    Descripcion: {selectedDescription.description}
+                  </Typography>
                   {/* Id: {selectedDescription._id}<br />
                   Marca: {selectedDescription.marca}<br />
                   Año fabricación: {selectedDescription.ano} */}

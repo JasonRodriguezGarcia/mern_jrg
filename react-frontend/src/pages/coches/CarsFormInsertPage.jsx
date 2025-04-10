@@ -32,7 +32,7 @@ function CarsFormInsertPage() {
 
         }
       );
-    // navigate(`/cars`);  
+    navigate(`/cars`);  
     console.log("Mandar fetch")
   }
 

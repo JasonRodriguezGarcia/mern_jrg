@@ -56,7 +56,7 @@ function CarsView() {
           aria-describedby="alert-dialog-description"
       >
           <DialogTitle id="viewCar-dialog-title">
-              {selectedActionMessage}
+              {selectedActionMessage} <h2>Car details</h2>
           </DialogTitle>
           <DialogContent>
               <DialogContentText id="alert-dialog-description">
@@ -67,7 +67,7 @@ function CarsView() {
           </DialogContent>
           <DialogActions>
               {/* <Button onClick={()=> setOpenViewDialog(false)}>Disagree</Button> */}
-              <Button onClick={()=> navigate('/')} autoFocus>
+              <Button onClick={()=> navigate('/cars')} autoFocus>
                   Close
               </Button>
           </DialogActions>

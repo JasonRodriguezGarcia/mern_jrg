@@ -60,10 +60,6 @@ const CarsListComponent = () => {
     navigate(`/cars/view/${id}`);
   }
 
-  const handleNew = () => {
-    navigate(`/cars/new`);
-  }
-
 const handleDialog = async (id) => {
     setOpenViewDialog(true)
     try {
@@ -80,18 +76,26 @@ const handleDialog = async (id) => {
     }
 
 }
-const handleDelete = () => {
+const handleDelete = (id) => {
     let resultado = ""
-    // fetch(`http://localhost:5000/api/v1/cars/${id}`,
-    //     {method: "delete"})
-    // .then(response => response.json())
-    // .then(data => {
-    //     resultado = data
-    //     if (resultado) {
-    //         console.log("coche borrado:", resultado)
-    //     }
-    // })
+    fetch(`http://localhost:5000/api/v1/cars/${id}`,
+        {method: "delete"})
+    .then(response => response.json())
+    .then(data => {
+        resultado = data
+        if (resultado) {
+            console.log("coche borrado:", resultado)
+        }
+    })
+
+    setOpenViewDialog(false)
+    setCars(cars => {
+        let tempCars = [...cars]
+        tempCars = tempCars.filter(car => car._id !== id)
+        return tempCars
+    })
 }
+    
 
   // Render loading, error, or the list of cars
     return (
@@ -104,7 +108,7 @@ const handleDelete = () => {
               aria-describedby="alert-dialog-description"
           >
               <DialogTitle id="viewCar-dialog-title">
-                  Delete Car
+                  <h2>Delete Car?</h2>
               </DialogTitle>
               <DialogContent>
                   <DialogContentText id="alert-dialog-description">
@@ -116,7 +120,7 @@ const handleDelete = () => {
               </DialogContent>
               <DialogActions>
                   {/* <Button onClick={()=> setOpenViewDialog(false)}>Disagree</Button> */}
-                  <Button onClick={handleDelete} autoFocus>
+                  <Button onClick={()=> handleDelete(carToDelete._id)} autoFocus>
                       Borrar
                   </Button>
                   <Button onClick={()=> setOpenViewDialog(false)} autoFocus>

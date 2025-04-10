@@ -1,15 +1,44 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Box, TextField } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
 function CarsFormModifyPage() {
+    const [error, setError] = useState('')
+    // const [setLoading] = false
+    const [selectedCar, setSelectedCar] = useState({})
+    const [idCoche, setIdCoche] = useState('')
     const [marca, setMarca] = useState('')
     const [modelo, setModelo] = useState('')
     const [ano, setAno] = useState('')
 
     const {id} = useParams()
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
+
+    useEffect(()=> {
+        const fetchCar = async () => {
+            try {
+                const response = await fetch(`http://localhost:5000/api/v1/cars/${id}`);
+                if (!response.ok) {
+                throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                console.log("imprimo data: ", data)
+                setSelectedCar(data)
+                console.log("imprimo selectedCar: ", selectedCar)
+                setIdCoche(data._id)
+                setMarca(data.marca)
+                setModelo(data.modelo)
+                setAno(data.ano)
+
+            } catch (error) {
+                setError(error.message); // Handle errors
+            } finally {
+                // setLoading(false); // Set loading to false once data is fetched or error occurs
+            }
+        }
+        fetchCar()
+    }, [])
 
 
     const goToHome = () => {
@@ -26,18 +55,19 @@ function CarsFormModifyPage() {
     }
 
       // fetch POST y pasar user como cuerpo (body)
-      const response = await fetch('http://localhost:5000/api/v1/cars',
+      const response = await fetch(`http://localhost:5000/api/v1/cars/${idCoche}`,
         {
-          method: 'POST',
+          method: 'PUT',
           headers: {'Content-type': 'application/json; charset=UTF-8'},
           body: JSON.stringify(coche)
 
         }
       );
 
-      setMarca("")
-      setModelo("")
-      setAno("")
+    //   setMarca("")
+    //   setModelo("")
+    //   setAno("")
+    navigate("/cars");
     console.log("Mandar fetch")
 }
 
@@ -45,7 +75,7 @@ function CarsFormModifyPage() {
 
   return (
     <div>
-      <h2>Welcome User Form Insert Peich</h2>
+      <h2>Welcome User Form Modify Peich</h2>
 
       {/* UN BOX QUE ACTUA COMO UN FORMULARIO */}
       <Box component="form" onSubmit={handleFormSubmit}
@@ -61,9 +91,9 @@ function CarsFormModifyPage() {
         }}
       >
 
-        <TextField id="marca" label="Marca" variant="outlined" onChange={(e)=> setMarca(e.target.value)}/>
-        <TextField id="modelo" label="Modelo" variant="outlined" onChange={(e)=> setModelo(e.target.value)}/>
-        <TextField id="ano" label="Año" variant="filled" onChange={(e)=> setAno(e.target.value)}/>
+        <TextField id="marca" value={marca} label="Marca" variant="outlined" onChange={(e)=> setMarca(e.target.value)}/>
+        <TextField id="modelo" value={modelo} label="Modelo" variant="outlined" onChange={(e)=> setModelo(e.target.value)}/>
+        <TextField id="ano" value={ano} label="Año" variant="filled" onChange={(e)=> setAno(e.target.value)}/>
 
         <Button type="submit" variant="contained" color="primary">
           Guardar

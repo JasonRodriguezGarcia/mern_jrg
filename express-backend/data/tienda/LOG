@@ -1,1 +1,5 @@
-2025/04/10-10:08:12.075 d84 Delete type=3 #1
+2025/04/10-10:57:38.680 21ac Recovering log #3
+2025/04/10-10:57:38.696 21ac Level-0 table #5: started
+2025/04/10-10:57:38.700 21ac Level-0 table #5: 3364 bytes OK
+2025/04/10-10:57:38.707 21ac Delete type=0 #3
+2025/04/10-10:57:38.707 21ac Delete type=3 #2

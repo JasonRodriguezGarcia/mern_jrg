@@ -6,6 +6,7 @@ import HomePage from './pages/coches/HomePage';
 import CarsListPage from './pages/coches/CarsListPage';
 import CarsFormInsertPage from './pages/coches/CarsFormInsertPage';
 import CarsView from './pages/coches/CarsView';
+import CarsFormModifyPage from './pages/coches/CarsFormModifyPage';
 
 // http://localhost:5000/api/v1/users?summary=count
 
@@ -18,6 +19,7 @@ function App() {
         {/* <Route path="/users/:id/edit" element={<CochesFormEditPage />} />  No implementado */}
         <Route path="/cars/new" element={<CarsFormInsertPage />} />
         <Route path="/cars/view/:id" element={<CarsView />} />
+        <Route path="/cars/edit/:id" element={<CarsFormModifyPage />} />
       </Routes>
     </BrowserRouter>
   );

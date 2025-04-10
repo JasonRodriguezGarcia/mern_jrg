@@ -56,8 +56,11 @@ const CarsListComponent = () => {
     fetchCars(); // Call the async function
   }, []); // Empty dependency array, so it runs once when the component mounts
 
-  const handleView = (id) => {
+  const goToViewCar = (id) => {
     navigate(`/cars/view/${id}`);
+  }
+  const goToEditCar = (id) => {
+    navigate(`/cars/edit/${id}`);
   }
 
 const handleDialog = async (id) => {
@@ -152,13 +155,13 @@ const handleDelete = (id) => {
                         <TableCell align="right">{coche.ano}</TableCell>
                         <TableCell align="right">
                           <ButtonGroup variant="contained" aria-label="Basic button group">
-                              <Button onClick={()=> handleView(coche._id)}>
+                              <Button onClick={()=> goToViewCar(coche._id)}>
                                 🔎View
                               </Button>
                               {/* <Button onClick={handleNew} sx={{ backgroundColor: "green", color: "white" }}>
                                 ➕Add
                               </Button> */}
-                              <Button sx={{ backgroundColor: "green", color: "white" }}>
+                              <Button onClick={()=> goToEditCar(coche._id)} sx={{ backgroundColor: "green", color: "white" }}>
                                 ✏️Modify
                               </Button>
                               <Button onClick={()=> handleDialog(coche._id)} sx={{ backgroundColor: "blue", color: "white" }}>

@@ -6,15 +6,16 @@ function HomePage() {
     const navigate = useNavigate();
 
     const goToCars = () => {
-        navigate("/descriptions");
+        navigate("/cars");
     }
 
   return (
     <div>
       <h2>Welcome JOM Peich</h2>
 
+
       <Button variant="contained" color="primary" onClick={goToCars}>
-        Go to Descriptions
+        Go to Cars
       </Button>
     </div>
   );

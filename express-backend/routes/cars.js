@@ -2,6 +2,48 @@ import { Router} from 'express';
 import db from '../db.js'; // importamos PouchDB
 const router = Router()
 
+// busqueda para precio
+router.get('/search', async(req, res) => { // ojo con el order al poner este gues
+    // http://localhost:5000/api/v1/cars/search?ano=1990
+    const {ano} = req.query
+    try {
+        const selector = {} // creamos datos para luego consultar con el find, ESTO PARA UN AND
+        
+        // esto para el OR, OJO tienen que existir los campos nombre y edad en el querystring
+        // const selector = {
+        //     $or: [
+        //         {nombre: nombre},
+        //         {edad: {$gt: parseInt(edad)}}
+
+        //     ]
+        // }
+// https://pouchdb.com/guides/mango-queries.html // mirar !!!
+        // // {nombre: 'Maria', edad: { $gt:12} }    //gt para greater than,  gte lte lt
+        // if (nombre) {  // si tenemos el selector nombre lo añadimos al selector
+        //     selector.nombre = nombre
+        // }
+        // // ojo del querystring viene string, para edad hay que hacer un parseInt
+        // // esto sería un AND POR DEFECTO
+        if (ano) {
+            selector.ano = {$gt: ano}
+        }
+
+        console.log(selector)
+
+        const result = await db.find({
+            selector,
+            fields: ['_id', '_rev', 'marca', 'modelo', 'ano'],
+            limit: 10
+        })
+        res.json(result.docs)
+    }
+    catch (error) {
+        console.log(error)
+    }
+    // res.json(nombre)
+})
+
+
 
 router.get('/', async (req, res) => {
     

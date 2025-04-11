@@ -1,19 +1,61 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Button, Box, TextField, Typography } from '@mui/material';
 
-function DescriptionsFormEditPage() {
+function DescriptionsFormInsertPage() {
+    const [error, setError] = useState('')
+  
+    const [selectedDescription, setSelectedDescription] = useState({})
+    const [idCoche, setIdCoche] = useState('')
+    const [marca, setMarca] = useState('')
+    const [modelo, setModelo] = useState('')
+    const [ano, setAno] = useState('')
+
     const [picture, setPicture] = useState(Math.floor(Math.random() * 7))
     const [description, setDescription] = useState('')
     const [name, setName] = useState('')
     const [date, setDate] = useState(new Date().toUTCString())
 
-    console.log("imagen nº: ", picture)
+
+    
+    const {id} = useParams()
     const navigate = useNavigate();
+
+    useEffect(()=> {
+        const fetchDescription = async () => {
+            try {
+                const response = await fetch(`http://localhost:5000/api/v1/descriptions/${id}`);
+                if (!response.ok) {
+                throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                console.log("imprimo data: ", data)
+                setSelectedDescription(data)
+                console.log("imprimo selectedDescription: ", selectedDescription)
+                setPicture(data.picture)
+                setDescription(data.description)
+                setName(data.name)
+                // setDate()
+
+                // setIdCoche(data._id)
+                // setMarca(data.marca)
+                // setModelo(data.modelo)
+                // setAno(data.ano)
+
+            } catch (error) {
+                setError(error.message); // Handle errors
+            } finally {
+                // setLoading(false); // Set loading to false once data is fetched or error occurs
+            }
+        }
+        fetchDescription()
+    }, [])
 
     const goToHome = () => {
       navigate("/descriptions");
     }
+
   const handleFormSubmit = async (e) => {
     e.preventDefault()
 
@@ -26,9 +68,9 @@ function DescriptionsFormEditPage() {
     }
 
       // fetch POST y pasar user como cuerpo (body)
-    const response = await fetch('http://localhost:5000/api/v1/descriptions',
+    const response = await fetch(`http://localhost:5000/api/v1/descriptions/${id}`,
       {
-        method: 'POST',
+        method: 'PUT',
         headers: {'Content-type': 'application/json; charset=UTF-8'},
         body: JSON.stringify(descriptionItem)
       }
@@ -79,8 +121,8 @@ function DescriptionsFormEditPage() {
           >
 
             {/* <TextField id="picture" label="Picture" variant="outlined" onChange={(e)=> setPicture(e.target.value)} /> */}
-            <TextField id="name" label="Student's name ..." variant="filled" onChange={(e)=> setName(e.target.value)} required/>
-            <TextField id="description" label="Describe the image..." variant="outlined" multiline rows={5}
+            <TextField value={name} id="name" label="Student's name ..." variant="filled" onChange={(e)=> setName(e.target.value)} required/>
+            <TextField value={description} id="description" label="Describe the image..." variant="outlined" multiline rows={5}
             onChange={(e)=> setDescription(e.target.value)} required
             />
             {/* <TextField value={date} id="date" variant="filled" onChange={(e)=> setDate(e.target.value)} disabled={true}/> */}
@@ -99,4 +141,4 @@ function DescriptionsFormEditPage() {
     </div>
   );
 }
-export default DescriptionsFormEditPage;
+export default DescriptionsFormInsertPage;

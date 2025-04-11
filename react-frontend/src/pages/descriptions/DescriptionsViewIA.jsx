@@ -19,7 +19,7 @@ function DescriptionsViewIA() {
   const ai = new GoogleGenAI({ apiKey: process.env.REACT_APP_GEMINI_API_KEY }); 
 
   useEffect(()=> {
-    const fetchCar = async () => {
+    const fetchDescription = async () => {
       try {
         const response = await fetch(`http://localhost:5000/api/v1/descriptions/${id}`);
         if (!response.ok) {
@@ -33,7 +33,7 @@ function DescriptionsViewIA() {
         setLoading(false); // Set loading to false once data is fetched or error occurs
       }
     }
-    fetchCar()
+    fetchDescription()
   }, [])
 
   const handleHome = () => {
@@ -51,7 +51,9 @@ function DescriptionsViewIA() {
     // setResponses(prevResponses => [...prevResponses, geminiMessage])
     console.log(response.text);
     setIaActivated(false)
+    // const processedMessage = geminiMessage.message.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
     setMessage(geminiMessage.message)
+    // setMessage(processedMessage)
   }
   return (
     <div>
@@ -69,7 +71,7 @@ function DescriptionsViewIA() {
             {iaActivated && <CircularProgress />}
             {!iaActivated && 
                 <>
-                    <h2>Corrected text</h2>
+                    <h2>Corrected text:</h2>
                     {message}
                 </>
             }
@@ -77,7 +79,7 @@ function DescriptionsViewIA() {
                 <Button variant="contained" color="primary" onClick={()=> checkWithIA(selectedDescription._id)} autoFocus
                     sx={{margin: "10px"}}
                     >
-                    Check with IA
+                    Check description with IA
                 </Button>
                 <Button variant="contained" color="primary" onClick={handleHome} autoFocus
                     sx={{margin: "10px"}}

@@ -46,6 +46,7 @@ const DescriptionsListComponent = () => {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
+        data.sort((firstItem, secondItem) => new Date(firstItem.date) - new Date(secondItem.date))
         setDescriptions(data); // Set the descriptions to state
       } catch (error) {
         setError(error.message); // Handle errors
@@ -119,17 +120,23 @@ const handleDelete = (id) => {
               </DialogTitle>
               <DialogContent>
                   <DialogContentText id="alert-dialog-description">
-                      Image: {descriptionToDelete.picture}<br />
+                      {/* Image: {descriptionToDelete.picture} */}
+                      <Box component="img"
+                        src={`../../../assets/${descriptionToDelete.picture}.jpg`} sx={{with: "350px", height: "350px"}} 
+                      /><br />
                       Student's name: {descriptionToDelete.name}<br />
                       Description: {descriptionToDelete.description}<br />
                   </DialogContentText>
               </DialogContent>
               <DialogActions>
                   {/* <Button onClick={()=> setOpenViewDialog(false)}>Disagree</Button> */}
-                  <Button onClick={()=> handleDelete(descriptionToDelete._id)} autoFocus>
+                  <Button onClick={()=> handleDelete(descriptionToDelete._id)} 
+                    variant="contained" autoFocus sx={{backgroundColor: "red"}}
+                  >
                       Delete
                   </Button>
-                  <Button onClick={()=> setOpenViewDialog(false)} autoFocus>
+                  <Button onClick={()=> setOpenViewDialog(false)} autoFocus variant="contained"
+                  >
                       Cancel
                   </Button>
               </DialogActions>

@@ -12,9 +12,9 @@ function DescriptionsListPage() {
 
   return (
     <div>
-      <h1>Welcome to Descriptions</h1>
+      <h1>Welcome to English Descriptions exercise</h1>
       <Button variant="contained" color="primary" onClick={goToNewDescription}>
-        Create descriptions
+        Create description
       </Button>
       
       <DescriptionsListComponent />

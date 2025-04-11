@@ -11,7 +11,7 @@ import CarsFormModifyPage from './pages/coches/CarsFormModifyPage';
 import DescriptionsListPage from './pages/descriptions/DescriptionsListPage';
 import DescriptionsFormInsertPage from './pages/descriptions/DescriptionsFormInsertPage';
 import DescriptionsView from './pages/descriptions/DescriptionsView';
-
+import DescriptionsViewIA from './pages/descriptions/DescriptionsViewIA';
 
 
 // http://localhost:5000/api/v1/users?summary=count
@@ -30,6 +30,7 @@ function App() {
         <Route path="/descriptions" element={<DescriptionsListPage />} />
         <Route path="/descriptions/new" element={<DescriptionsFormInsertPage />} />
         <Route path="/descriptions/view/:id" element={<DescriptionsView />} />
+        <Route path="/descriptions/view/:id/ia" element={<DescriptionsViewIA />} />
         {/* <Route path="/descriptions/edit/:id" element={<CarsFormModifyPage />} /> */}
 
       </Routes>

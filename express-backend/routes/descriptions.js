@@ -39,6 +39,21 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.get('/:id/ia', async (req, res) => {
+
+    const {id} = req.params
+    console.log(id)
+    try {
+        const car = await db.get(id)   // cogemos documento (car)
+        // await db..remove(user)   // borra documento
+        res.status(200).json({ ...car })
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: 'Failed to get car' });
+    }
+});
+
 router.post('/', async (req, res) => {
     try {
         const description = req.body; // car data from request body

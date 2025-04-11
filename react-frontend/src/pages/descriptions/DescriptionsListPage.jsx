@@ -6,25 +6,19 @@ function DescriptionsListPage() {
 
   const navigate = useNavigate();
 
-  const goToHome = () => {
-    navigate("/descriptions");
-  }
-  const goToNewCar = () => {
+  const goToNewDescription = () => {
       navigate("/descriptions/new");
   }
 
   return (
     <div>
       <h1>Welcome to Descriptions</h1>
-      <Button variant="contained" color="primary" onClick={goToNewCar}>
+      <Button variant="contained" color="primary" onClick={goToNewDescription}>
         Create descriptions
       </Button>
       
       <DescriptionsListComponent />
 
-      {/* <Button variant="contained" color="primary" onClick={goToHome}>
-        Home
-      </Button> */}
     </div>
   );
 }

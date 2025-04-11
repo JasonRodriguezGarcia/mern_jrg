@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Box, TextField } from '@mui/material';
+import { Button, Box, TextField, Typography } from '@mui/material';
 
 function DescriptionsFormInsertPage() {
     const [picture, setPicture] = useState(Math.floor(Math.random() * 6))
@@ -59,10 +59,10 @@ function DescriptionsFormInsertPage() {
             <Box component="img" sx={{width: "500px"}}
             src={`../../assets/${picture}.jpg`}
             />
-
+            <Typography>Picture can be changed randomly by pressing F5</Typography>
             {/* <TextField id="picture" label="Picture" variant="outlined" onChange={(e)=> setPicture(e.target.value)} /> */}
-            <TextField id="name" label="Student's name ..." variant="filled" onChange={(e)=> setName(e.target.value)} required/>
-            <TextField id="description" label="Describe the image..." variant="outlined" multiline rows={5}
+            <TextField id="name" label="Pls insert student's name ..." variant="filled" onChange={(e)=> setName(e.target.value)} required/>
+            <TextField id="description" label="Pls describe the image..." variant="outlined" multiline rows={5}
             onChange={(e)=> setDescription(e.target.value)} required
             />
             {/* <TextField value={date} id="date" variant="filled" onChange={(e)=> setDate(e.target.value)} disabled={true}/> */}

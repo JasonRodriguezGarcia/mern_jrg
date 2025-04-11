@@ -63,6 +63,9 @@ const DescriptionsListComponent = () => {
   const goToEditDescription = (id) => {
     navigate(`/descriptions/edit/${id}`);
   }
+  const goToIA = (id) => {
+    navigate(`/descriptions/view/${id}/ia`);
+  }
 
 const handleDialog = async (id) => {
     setOpenViewDialog(true)
@@ -151,7 +154,13 @@ const handleDelete = (id) => {
                     >
                         <TableCell component="th" scope="row" align="right">
                           <Box component="img"
-                            src={`../../../assets/${description.picture}.jpg`} sx={{with: "80px", height: "80px"}} 
+                            src={`../../../assets/${description.picture}.jpg`} 
+                            sx={{with: "80px", height: "80px", transition: "all 1s", boxShadow: "10px 10px 10px 5px",
+                                    "&:hover": {
+                                        transform: "scale(2.5)",
+                                        cursor: "pointer",
+                                    }
+                            ,}} 
                           />
                           {/* {description.picture} */}
                         </TableCell>
@@ -178,7 +187,7 @@ const handleDelete = (id) => {
                                 ❌
                                 {/* Delete */}
                               </Button>
-                              <Button title="IA" onClick={()=> handleDialog(description._id)} 
+                              <Button title="IA" onClick={()=> goToIA(description._id)} 
                                 sx={{ backgroundColor: "blue", color: "white", fontSize: "20px"}}>
                                 🤖
                                 {/* Delete */}

@@ -42,14 +42,17 @@ function DescriptionsView() {
   }, [])
 
   const handleHome = () => {
-    // ()=> setOpenViewDialog(false)
-    navigate(`/cars/new`);
+    navigate(`/descriptions`);
   }
 
   return (
     <div>
       <h2>Welcome Descriptions View</h2>
-
+        <Button variant="contained" color="primary" onClick={handleHome} autoFocus
+            sx={{margin: "10px"}}
+        >
+            Close
+        </Button>
       <Dialog
           open={openViewDialog}
           onClose={()=> setOpenViewDialog(false)}

@@ -7,7 +7,10 @@ router.get('/search', async(req, res) => { // ojo con el order al poner este gue
     // http://localhost:5000/api/v1/cars/search?ano=1990
     const {ano} = req.query
     try {
-        const selector = {} // creamos datos para luego consultar con el find, ESTO PARA UN AND
+        const selector = {
+            type: 'car'     // para user los type 'car', recordar que creamos en su momento 'users' y 'descriptions'
+        } 
+        // creamos datos para luego consultar con el find, ESTO PARA UN AND
         
         // esto para el OR, OJO tienen que existir los campos nombre y edad en el querystring
         // const selector = {
@@ -25,7 +28,7 @@ router.get('/search', async(req, res) => { // ojo con el order al poner este gue
         // // ojo del querystring viene string, para edad hay que hacer un parseInt
         // // esto sería un AND POR DEFECTO
         if (ano) {
-            selector.ano = {$gt: ano}
+            selector.ano = {$gte: ano}
         }
 
         console.log(selector)
@@ -58,7 +61,8 @@ router.get('/', async (req, res) => {
         // Filter the cars if 'type' is used in the document
         const cars = result.rows
             .filter(row => row.doc.type === 'car')  // Ensure the document type is 'car'
-            .map(row => row.doc);  // Map to get the document content
+            .map(row => row.doc).sort((a,b) => a.marca.localeCompare(b.marca)) // para ordenar por un campo String
+            // .sort((a, b) => (parseInt(a.ano) - parseInt(b.ano)));  // para ordenar por campo string pasado a número
 
         console.log(cars)
  

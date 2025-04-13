@@ -2,7 +2,7 @@ import { Router} from 'express';
 import db from '../db.js'; // importamos PouchDB
 const router = Router()
 
-const USER = 'user' // reemplazar 'user' con USER
+const USER = 'user' // reemplazar más adelante 'user' con USER
 
 // http://localhost:5000/api/v1/users/search?nombre=Pepe
 // con el find podremos hacer esta búsqueda

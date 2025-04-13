@@ -6,8 +6,8 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 const CarsSelector = () => {
-    const [age, setAge] = useState(0)
-    const [selectedCar, setSelectedCar] = useState({})
+    const [age, setAge] = useState('')
+    const [selectedCars, setSelectedCars] = useState([])
     const [year, setYear] = useState('');
     const [idCoche, setIdCoche] = useState('')
     const [marca, setMarca] = useState('')
@@ -19,20 +19,20 @@ const CarsSelector = () => {
     const handleChange = async (e) => {
       e.preventDefault()
       setAge(e.target.value)
+      if (e.target.value === '') {
+        setSelectedCars([])
+        return
+      }
       try {
         // http://localhost:5000/api/v1/cars/search?ano=1990
-          const response = await fetch(`http://localhost:5000/api/v1/cars/search?ano=${age}`);
+          const response = await fetch(`http://localhost:5000/api/v1/cars/search?ano=${e.target.value}`);
           if (!response.ok) {
           throw new Error('Network response was not ok');
           }
           const data = await response.json();
           console.log("imprimo data: ", data)
-          setSelectedCar([...data])
-          console.log("imprimo selectedCar: ", selectedCar)
-          setIdCoche(data._id)
-          setMarca(data.marca)
-          setModelo(data.modelo)
-          setAno(data.ano)
+          let temp = [...data].sort((firstItem, secondItem) => firstItem.ano - secondItem.ano)
+          setSelectedCars(temp)
 
       } catch (error) {
           setError(error.message); // Handle errors
@@ -44,15 +44,15 @@ const CarsSelector = () => {
       <>
         <Box sx={{ width: 120, margin: "20px"}}>
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <InputLabel id="demo-simple-select-label">Initial Year</InputLabel>
             <Select
               labelId="Selecciona año mínimo"
               id="demo-simple-select"
               value={age}
-              label="Age"
+              label="Initial Year"
               onChange={(e)=>handleChange(e)}
             >
-              <MenuItem >empty</MenuItem>
+              <MenuItem value={''}>empty</MenuItem>
               <MenuItem value={1990}>1990</MenuItem>
               <MenuItem value={1991}>1991</MenuItem>
               <MenuItem value={1992}>1992</MenuItem>
@@ -64,7 +64,15 @@ const CarsSelector = () => {
             </Select>
           </FormControl>
           {/* crear componente y usar un map */}
+
         </Box>
+          {selectedCars.map((car, index) => (
+            <div key={car._id || index}>
+                <p>
+                * {car.marca} - {car.modelo} - {car.ano}
+                </p>
+            </div>
+          ))}
     </>     
   )
 }

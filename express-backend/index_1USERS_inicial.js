@@ -1,4 +1,4 @@
-// USERS
+// USERS versión inicial, usando un array como base de datos
 import express from "express";
 import path from "path";
 import cors from 'cors';
@@ -73,13 +73,15 @@ app.get("/api/v1/users/:id", (req, res) => {
 
 app.post("/api/v1/users", (req, res) => {
     // conseguir datos de un usuario
+    // nos han pasado mediante CURL UN OBJETO: {\"id\": 44, \"nombre\": \"Juanin\", \"edad\": 33}
     const {id, nombre, edad} = req.body;
-    // inserter usuario al array usuario
+    // insertar usuario al array users mediante el objeto usuario
     const usuario = {
         id: id,
         nombre: nombre,
         edad: edad
     }
+    // añadiendo al array users
     users.push(usuario)
     console.log(users)
     // devolver respuesta de exito
@@ -91,15 +93,10 @@ app.delete("/api/v1/users/:id", (req, res) => {
     const {id, nombre, edad} = req.params;
     const index = users.findIndex(user => user.id == id)
     users.splice(index, 1)
-    // users = users.filter(usuario => usuario.id != id)
-
-    // users.filter(usuario => usuario.nombre == )
     // devolver respuesta de exito
     console.log(users)
     res.json({message: `Usuario borrado.`})
 })
-
-
 
 // Start Server
 app.listen(PORT, () => {

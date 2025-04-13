@@ -13,7 +13,8 @@ import DescriptionsFormInsertPage from './pages/descriptions/DescriptionsFormIns
 import DescriptionsFormEditPage from './pages/descriptions/DescriptionsFormEditPage';
 import DescriptionsView from './pages/descriptions/DescriptionsView';
 import DescriptionsViewIA from './pages/descriptions/DescriptionsViewIA';
-import CarsSelector from './components/CarSelector';
+import CarsSelector from './components/CarsSelector';
+import CochesCuenta from './components/CochesCuenta';
 
 
 // http://localhost:5000/api/v1/users?summary=count
@@ -21,6 +22,7 @@ import CarsSelector from './components/CarSelector';
 function App() {
   return (
     <BrowserRouter>
+      <CochesCuenta />
       <Routes>
 
         <Route path="/" element={<HomePage />} />

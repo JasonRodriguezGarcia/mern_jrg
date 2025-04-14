@@ -59,8 +59,9 @@ INSTALAR LOS PAQUETES EXPRESS, NODEMON Y CORS
 npm install express
 npm install --save-dev nodemon  // para que al cambiar código se ejecture express de nuevo
 npm install cors
-npm install pouchdb             // para poder usar pouchdb
-npm install pouchdb-find        // para poder usar find en pouchdb
+// para poder usar pouchdb OJO A PARTIR DE AHORA LAS RUTAS EN EXPRESS LLADAS CON ASYNC-AWAIT
+npm install pouchdb             
+npm install pouchdb-find        // para poder usar .find en pouchdb, 
 
 en el package.json
 MODIFICAR EL PACKAGE.JSON CREADO PARA USAR EL MODO DE TRABAJO MODERNO "ES MODULE" (EL MODO VIEJO ES "COMMONJS") Y PARA

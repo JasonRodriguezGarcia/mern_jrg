@@ -49,12 +49,19 @@ router.get('/search', async(req, res) => { // ojo con el order al poner este gue
 
 
 router.get('/', async (req, res) => {
+// AÑADIENDO FUNCIONALIDADES ADICIONALES
+// http://localhost:5000/api/v1/users?summary=newer
+// http://localhost:5000/api/v1/users?summary=older
+// http://localhost:5000/api/v1/users?summary=count
     
     try {
         // Fetch all documents from the 'users_db'
+        // OJO ESTA FORMA NO ES OPTIMIZADA (BUENA), EN USERS.JS ESTÁ LA NUEVA FORMA DE BUSCAR CON .FIND()
         const result = await db.allDocs({ include_docs: true });
         console.log(result);
-  
+        // Tratando de recuperar summay del queryString
+        const {summary} = req.query
+
         // Extract car data from the documents
         // const cars = result.rows.map(row => row.doc);
 
@@ -65,7 +72,20 @@ router.get('/', async (req, res) => {
             // .sort((a, b) => (parseInt(a.ano) - parseInt(b.ano)));  // para ordenar por campo string pasado a número
 
         console.log(cars)
- 
+        let cuenta = cars.length
+        let antiguoNuevo = cars.sort((a, b) => a.ano - b.ano)
+        // Si summary está en el quersyString
+        if (summary === "count"){
+            return res.status(200).json({resultado: cuenta})
+        }
+        if (summary == "older") {
+            return res.status(200).json({resultado: antiguoNuevo[0]})
+        }
+        
+        if (summary === "newer") {
+            // pending
+            return res.status(200).json({resultado: antiguoNuevo[antiguoNuevo.length-1]})
+        }
         // Send the cars as JSON response
         res.json(cars);
     } catch (error) {

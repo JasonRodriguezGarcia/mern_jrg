@@ -1,5 +1,5 @@
-2025/04/13-19:50:56.260 23cc Recovering log #262
-2025/04/13-19:50:56.260 23cc Level-0 table #265: started
-2025/04/13-19:50:56.275 23cc Level-0 table #265: 237 bytes OK
-2025/04/13-19:50:56.275 23cc Delete type=0 #262
-2025/04/13-19:50:56.275 23cc Delete type=3 #260
+2025/04/14-15:15:32.092 420c Recovering log #353
+2025/04/14-15:15:32.092 420c Level-0 table #356: started
+2025/04/14-15:15:32.107 420c Level-0 table #356: 237 bytes OK
+2025/04/14-15:15:32.111 420c Delete type=0 #353
+2025/04/14-15:15:32.111 420c Delete type=3 #351

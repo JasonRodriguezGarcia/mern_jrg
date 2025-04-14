@@ -1,4 +1,4 @@
-// USERS
+// USERS, penúltima versión antes del cambio a rutas avanzadas con la creación de db.js, users.js
 import express from "express";
 import path from "path";
 import cors from 'cors';

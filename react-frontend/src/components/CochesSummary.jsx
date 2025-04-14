@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress, { circularProgressClasses } from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Icon from '@mui/material/Icon';
@@ -13,24 +13,65 @@ import CardContent from '@mui/material/CardContent';
 
 // https://jsonplaceholder.typicode.com/
 
-const CochesCuenta = () => {
+const CochesSummary = () => {
 
     const [cuenta, setCuenta] = useState(0)
+    const [antiguo, setAntiguo] = useState({})
+    const [nuevo, setNuevo] = useState({})
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(()=> {
-        fetch('http://localhost:5000/api/v1/coches?summary=count')
-            .then(response=> response.json())
-            .then(data => setCuenta(data))
-        
+        const summary = async (summaryType) => {
+            try {
+                setIsLoading(true)
+                // const response = await fetch('http://localhost:5000/api/v1/cars?summary=count');
+                const response = await fetch(`http://localhost:5000/api/v1/cars?summary=${summaryType}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                // setCuenta(data.resultado)
+                switch (summaryType) {
+                    case "count":
+                        setCuenta(data.resultado)
+                        break
+                    case "older":
+                        setAntiguo(data.resultado)
+                        break
+                    case "newer":
+                        setNuevo(data.resultado)
+                        break
+                    default:
+                        console.log("Error in sumamry Type, joerr....")
+                }
+                console.log("imprimo data: ", data)
+                
+            }
+            catch (error) {
+                // setError(error.message); // Handle errors
+            }
+            finally {
+                setIsLoading(false); // Set loading to false once data is fetched or error occurs
+            }
+        }
+        // calling function
+        summary("count")
+        summary("older")
+        summary("newer")
+        // fetch('http://localhost:5000/api/v1/cars?summary=count')
+        // .then(response=> response.json())
+        // .then(data => setCuenta(data))
+    
     }, [])
 
 
     return (
         <>
+            {/* poniendo un icono de carga */}
+            {isLoading && <CircularProgress />}
             <Box sx={{display: "flex"}}>
-
                 {/* <Card sx={{ minWidth: 275 }}> */}
-                <Card sx={{width: "400px", margin: "20px", backgroundColor: 'beige'}}>
+                <Card sx={{width: "400px", margin: "10px", backgroundColor: 'beige'}}>
                     <CardContent>
                         <Typography variant="h5" component="div">
                             Base de datos Coches
@@ -39,7 +80,7 @@ const CochesCuenta = () => {
                             Cuenta de Coches
                         </Typography>
                         <Typography variant="body2" sx={{color: "red"}}>
-                            99 registros <br/>
+                            {cuenta} registros <br/>
                             Componente para usar la api <br/>
                             http://localhost:5000/api/v1/cars?summary=count
                         </Typography>
@@ -48,7 +89,7 @@ const CochesCuenta = () => {
                         <Button size="small">Cerrar</Button>
                     </CardActions>
                 </Card>
-                <Card sx={{width: "400px", margin: "20px", backgroundColor: 'beige'}}>
+                <Card sx={{width: "400px", margin: "10px", backgroundColor: 'beige'}}>
                     <CardContent>
                         <Typography variant="h5" component="div">
                             Base de datos Coches
@@ -57,7 +98,7 @@ const CochesCuenta = () => {
                             Coche más antiguo
                         </Typography>
                         <Typography variant="body2" sx={{color: "red"}}>
-                            Volksvagen año 1990 <br/>
+                            {antiguo.marca} {antiguo.modelo} {antiguo.ano} <br />
                             Componente para usar la api <br/>
                             http://localhost:5000/api/v1/cars?summary=older
                         </Typography>
@@ -66,7 +107,7 @@ const CochesCuenta = () => {
                         <Button size="small">Cerrar</Button>
                     </CardActions>
                 </Card>
-                <Card sx={{width: "400px", margin: "20px", backgroundColor: 'beige'}}>
+                <Card sx={{width: "400px", margin: "10px", backgroundColor: 'beige'}}>
                     <CardContent>
                         <Typography variant="h5" component="div">
                             Base de datos Coches
@@ -75,7 +116,7 @@ const CochesCuenta = () => {
                             Coche más nuevo
                         </Typography>
                         <Typography variant="body2" sx={{color: "red"}}>
-                            Kia año 1997 <br/>
+                            {nuevo.marca} {nuevo.modelo} {nuevo.ano} <br />
                             Componente para usar la api <br/>
                             http://localhost:5000/api/v1/cars?summary=newer
                         </Typography>
@@ -88,4 +129,4 @@ const CochesCuenta = () => {
         </>
     )
 }
-export default CochesCuenta;
+export default CochesSummary;

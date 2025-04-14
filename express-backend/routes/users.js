@@ -34,6 +34,7 @@ router.get('/search', async(req, res) => { // ojo con el order al poner este gue
 
         console.log(selector)
 
+        // OJO--- NUEVA FORMA DE BUSCAR CON .FIND, NO CON .ALLDOCS EN EL EJEMPLO DE CARS
         const result = await db.find({
             selector,
             fields: ['_id', '_rev', 'nombre', 'edad'],

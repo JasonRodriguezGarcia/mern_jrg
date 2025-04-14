@@ -6,19 +6,30 @@ const router = Router()
 router.get('/', async (req, res) => {
     
     try {
+        // ANTIGUA FORMA DE BUSCAR
         // Fetch all documents from the 'users_db'
-        const result = await db.allDocs({ include_docs: true });
-        console.log(result);
-  
+        // const result = await db.allDocs({ include_docs: true });
+        // console.log(result);
         // Filter the descriptions if 'type' is used in the document
-        const descriptions = result.rows
-            .filter(row => row.doc.type === 'descriptions')  // Ensure the document type is 'descriptions'
-            .map(row => row.doc);  // Map to get the document content
+        // const descriptions = result.rows
+        //     .filter(row => row.doc.type === 'descriptions')  // Ensure the document type is 'descriptions'
+        //     .map(row => row.doc);  // Map to get the document content
 
+        // NUEVA FORMA DE BUSCAR DATOS
+        const selector = {
+            type: "descriptions"
+        }
+        const descriptions = await db.find({
+            selector,
+            fields: ['_id', '_rev', 'picture', 'name', 'description'],
+            // limit: 10
+        })
+
+        // console.log(descriptions)
         console.log(descriptions)
  
         // Send the descriptions as JSON response
-        res.json(descriptions);
+        res.json(descriptions.docs);
     } catch (error) {
         res.status(500).json({ error: 'Failed to retrieve descriptions' });
     }

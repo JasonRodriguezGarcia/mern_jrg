@@ -3,7 +3,7 @@ import db from '../db.js'; // importamos PouchDB
 const router = Router()
 
 // busqueda para precio
-router.get('/search', async(req, res) => { // ojo con el order al poner este gues
+router.get('/search', async (req, res) => { // ojo con el order al poner este gues
     // http://localhost:5000/api/v1/cars/search?ano=1990
     const {ano} = req.query
     try {

@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
         }
         const descriptions = await db.find({
             selector,
-            fields: ['_id', '_rev', 'picture', 'name', 'description'],
+            fields: ['_id', '_rev', 'picture', 'name', 'description', 'date'],
             // limit: 10
         })
 

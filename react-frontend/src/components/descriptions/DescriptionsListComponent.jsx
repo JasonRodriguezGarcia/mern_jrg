@@ -31,7 +31,6 @@ const DescriptionsListComponent = () => {
 
   const [openViewDialog, setOpenViewDialog] = useState(false);
   const [closeViewDialog, setCloseViewDialog] = useState(true)
-  const [selectedCar, setSelectedCar] = useState({})
   const [descriptionToDelete, setDescriptionToDelete] = useState({})
   const [selectedActionMessage, setSelectedActionMessage] = useState("")
 
@@ -99,7 +98,7 @@ const handleDelete = (id) => {
     setOpenViewDialog(false)
     setDescriptions(descriptions => {
         let tempdescriptions = [...descriptions]
-        tempdescriptions = tempdescriptions.filter(car => car._id !== id)
+        tempdescriptions = tempdescriptions.filter(description => description._id !== id)
         return tempdescriptions
     })
 }

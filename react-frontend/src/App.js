@@ -17,6 +17,9 @@ import DescriptionsViewIA from './pages/descriptions/DescriptionsViewIA';
 import CarsSelector from './components/CarsSelector';
 import CochesSummary from './components/CochesSummary';
 
+import ShoppingCartComponent from './components/shoppingCart/ShoppingCartComponent';
+import ShoppingCartComponent2 from './components/shoppingCart/ShoppingCartComponent2';
+
 
 // http://localhost:5000/api/v1/users?summary=count
 
@@ -36,7 +39,11 @@ function App() {
         <Route path="/cars/selector" element={<CarsSelector />} />
 
       </Routes>
-    </BrowserRouter>
+
+      <br />
+      {/* <ShoppingCartComponent /> */}
+      <ShoppingCartComponent2 />
+      </BrowserRouter>
   );
 }
 

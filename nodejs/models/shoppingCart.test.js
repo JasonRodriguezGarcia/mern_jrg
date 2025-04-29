@@ -2,8 +2,27 @@ const { ShoppingCart } = require('./shoppingCart'); // OJO CLASES EMPIEZAN EN MA
 
 describe('Shopping Cart', ()=> {
     test('Pruebas shopping cart', () => {
-        const cart = new ShoppingCart("Euro")
+        const cart = new ShoppingCart("Euro");
         expect(cart.getItemCount()).toBe(0);
+        
+        // añadiendo 1 item
+        cart.addItem({id:1, nombre: "camiseta", "precio": 2.99, "cantidad": 1});
+        expect(cart.getItemCount()).toBe(1);
+
+        // añadiendo otro item
+        cart.addItem({id:2, nombre: "pantalones", "precio": 22.99, "cantidad": 1});
+        expect(cart.getItemCount()).toBe(2);
+        // conseguimos cantidad
+        expect(cart.getItems().length).toBe(2)
+        // también vale
+        // const items = cart.getItems()
+        // expect(items.length).toBe(2)
+
+        // vaciando
+        cart.clearCart();
+        expect(cart.getItemCount()).toBe(0);
+        // devuelve todos los items
+
 
     });
     // test('deberia dividir dos numeros', () => {

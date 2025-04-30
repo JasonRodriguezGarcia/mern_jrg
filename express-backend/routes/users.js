@@ -1,8 +1,92 @@
 import { Router} from 'express';
 import db from '../db.js'; // importamos PouchDB
+import { validateQuery, validateUserId } from '../middleware/users.js';
+import { authenticateToken } from '../middleware/login.js';
+import jwt from 'jsonwebtoken';
+
+
 const router = Router()
 
-const USER = 'user' // reemplazar más adelante 'user' con USER
+// PASADO A LOGIN.JS EN ROUTES
+// const USER = 'user' // reemplazar más adelante 'user' con USER
+// const JWT_SECRET = '12345';
+
+// // http://localhost:5000/api/v1/users/login con body de username y password
+// router.post('/login', async (req, res) => {
+//     const { username, password } = req.body;
+//     if (username == "maria" && password == "password") {
+//         // console.log("correcto")
+//         // res.json({message: "LOGIN CORRECTO"})
+//         const miToken = jwt.sign(
+//             { username: username.username },
+//             JWT_SECRET,
+//             { expiresIn: '1h' },
+//             { algorithm: 'HS256' } 
+//         )
+//         res.json({token: miToken})
+
+//     } else {
+//         console.log("incorrecto")
+//         res.json({message: "invalid login"})
+//     }
+
+// })
+
+// // curl http://localhost:5000/api/v1/login/profile -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE3NDQ5MTEyMTIsImV4cCI6MTc0NDkxNDgxMn0.gSgpWcF9O43rZJVDWf9xjbRsuALGBcJH6jjfvLvmNos"
+// router.get('/profile', authenticateToken, (req, res) => {
+//     // req.user is now available
+//     res.json({
+//         message: 'Welcome to the protected route!',
+//         user: req.user
+//     });
+//   });
+// en lugar de get usamos use, para cedir que es middleware
+// se llame a la ruta /test1 sea get, post, o lo que sea pasará SIEMPRE POR AQUI
+// antes usabamos middleware para que pasase siempre por ese middleware
+// router.use('/test1', async (req, res, next) => {
+//     console.log("Hola desde test1")
+//     console.log(`Loggin: ${req.method}`)
+//     next()
+// })
+
+
+function auditar() {
+    console.log("hola")
+}
+
+// inyectamos en plan middleware en el propio get, en este caso nuestra función
+// se podrían añadir más , auditar, checkmensajes, ...
+// router.get('/test1', auditar, async (req, res) => {
+//     res.json({message: "ok"})
+// })
+router.get('/test1/:id', validateUserId, async (req, res) => {
+    //  test en navegador con: http://localhost:5000/api/v1/users/test1/5
+    // falla con: http://localhost:5000/api/v1/users/test1/dd
+    const {id} = req.params;
+    res.json({message: `id ${id} es ok`})
+})
+router.get('/test2/:edad', validateUserId, async (req, res) => {
+    // http://localhost:5000/api/v1/users/test2/5
+    // falla con: http://localhost:5000/api/v1/users/test2/dd
+    const {edad} = req.params
+    res.json({message: `Edad ${edad} OK`})
+})
+router.get('/test3/:isActive', validateUserId, async (req, res) => {
+    // http://localhost:5000/api/v1/users/test3/true
+    // http://localhost:5000/api/v1/users/test3/dd
+    const {isActive} = req.params
+    res.json({message: `Esta ${isActive}`})
+})
+router.get('/test4', validateQuery, async (req, res) => {
+    const {person, edad} = req.query;
+
+    res.json({message: `id ${person} is ok`})
+})
+
+// router.get('/test2/:edad', validateUserId, async (req, res) => {
+//     const {id} = req.params;
+//     res.json({message: `edad ${edad} es ok`})
+// })
 
 // http://localhost:5000/api/v1/users/search?nombre=Pepe
 // con el find podremos hacer esta búsqueda
@@ -128,18 +212,18 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
+// router.get('/:id', async (req, res) => {
 
-    const {id} = req.params
-    try {
-        const car = await db.get(id)   // cogemos documento (user)
-        // await db.remove(user)   // borra documento
-        res.status(200).json({message: "OK"})
+//     const {id} = req.params
+//     try {
+//         const car = await db.get(id)   // cogemos documento (user)
+//         // await db.remove(user)   // borra documento
+//         res.status(200).json({message: "OK"})
 
-    } catch (error) {
-        res.status(500).json({ ...car });
-    }
-});
+//     } catch (error) {
+//         res.status(500).json({ ...car });
+//     }
+// });
 
 router.put('/:id', async (req, res) => {
     try {
@@ -169,4 +253,4 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-export default router;
+export default router

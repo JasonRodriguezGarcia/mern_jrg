@@ -7,6 +7,9 @@ import { fileURLToPath } from "url";
 import usersRouter from './routes/users.js';
 import carsRouter from './routes/cars.js';
 import descriptionsRouter from './routes/descriptions.js';
+import loginRouter from './routes/login.js';
+
+import { logger } from "./middleware/logger.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -15,7 +18,6 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 5000;
 const HOSTNAME = "127.0.0.1"
-
 
 // Middleware
 
@@ -26,6 +28,7 @@ app.use(cors()); // para tener acceso desde React, ya que React y Express no est
 // Habilita el parsing de JSON en los requests.
 // Es decir, cuando un cliente (como React) envía datos en formato JSON (por ejemplo, en un POST o PUT), Express puede leerlos desde req.body.
 app.use(express.json());
+app.use(logger); // adding middleware to show some logs
 // Esto registra routers separados para manejar distintas partes del backend:
 // /api/v1/users → controlado por usersRouter
 // /api/v1/cars → controlado por carsRouter
@@ -33,6 +36,7 @@ app.use(express.json());
 app.use('/api/v1/users', usersRouter)
 app.use('/api/v1/cars', carsRouter)
 app.use('/api/v1/descriptions', descriptionsRouter)
+app.use('/api/v1/login', loginRouter)
 
 // Start Server
 app.listen(PORT, HOSTNAME, () => {

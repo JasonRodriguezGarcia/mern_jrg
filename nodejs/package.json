@@ -2,6 +2,7 @@
   "name": "nodejs",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "jest"
   },
@@ -15,5 +16,8 @@
   },
   "jest": {
     "collectCoverage": true
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1"
   }
 }

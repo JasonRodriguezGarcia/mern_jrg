@@ -1,4 +1,5 @@
 import { useState } from "react"
+// la clase ShoppingCart deja de existir para convertirse en un Hook
 // ESTO ES UN HOOK, nombre SIEMPRE empieza por "use"
 // PURO JAVASCRIPT POR ESO EL .JS
 // HACEMOS LO MSMO QUE LA CLASE PERO CON JAVASCRIPT

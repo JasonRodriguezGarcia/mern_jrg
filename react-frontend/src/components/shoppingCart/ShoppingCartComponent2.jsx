@@ -24,9 +24,9 @@ const ShoppingCartComponent2 = () => {
             <button onClick={handleAddItem}>Add item</button>
 
             <ul>
-                {items.map(item => (
+                {items.map((item, index) => (
                     <>
-                        <li key={item.id}>{item.nombre} - {item.cantidad} - {item.precio}€</li>
+                        <li key={index.id}>{item.nombre} - {item.cantidad} - {item.precio}€</li>
                     </>
                 ))}
             </ul>

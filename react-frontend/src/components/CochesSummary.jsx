@@ -89,6 +89,8 @@ const CochesSummary = () => {
                         <Button size="small">Cerrar</Button>
                     </CardActions>
                 </Card>
+                {
+                    antiguo &&
                 <Card sx={{width: "400px", margin: "10px", backgroundColor: 'beige'}}>
                     <CardContent>
                         <Typography variant="h5" component="div">
@@ -107,6 +109,9 @@ const CochesSummary = () => {
                         <Button size="small">Cerrar</Button>
                     </CardActions>
                 </Card>
+                }
+                {
+                    nuevo &&
                 <Card sx={{width: "400px", margin: "10px", backgroundColor: 'beige'}}>
                     <CardContent>
                         <Typography variant="h5" component="div">
@@ -125,6 +130,7 @@ const CochesSummary = () => {
                         <Button size="small">Cerrar</Button>
                     </CardActions>
                 </Card>
+                }
             </Box>
         </>
     )

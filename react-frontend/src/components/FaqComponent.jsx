@@ -36,68 +36,37 @@ function FaqComponent() {
   };
   
   const questions = t('faq.questions', {returnObjects: true}) // returnObjects ¿?
-
+  console.log(questions)
   return (
     <div>
-      <h2>{t('welcome_message')}</h2>
+        <h2>{t('welcome_message')} (usando localStorage)</h2>
 
-        {questions.map((item, index) => (
+        {/* {questions.map((item, index) => (
             <li>
                 {item.q}
                 {item.a}
             </li>
         ))}
+ */}
 
+        {questions.map((item, index) => (
+            <Accordion key={index}>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls={`panel${index}-content`}
+                    id={`panel${index}-header`}
+                >
+                    <Typography component="span">{item.q}</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    {item.a}
+                </AccordionDetails>
 
-    <Accordion>
-        <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1-content"
-            id="panel1-header"
-        >
-            <Typography component="span">Accordion 1</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-        </AccordionDetails>
-        </Accordion>
-        <Accordion>
-        <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2-content"
-            id="panel2-header"
-        >
-            <Typography component="span">Accordion 2</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-        </AccordionDetails>
-        </Accordion>
-        <Accordion defaultExpanded>
-        <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel3-content"
-            id="panel3-header"
-        >
-            <Typography component="span">Accordion Actions</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-        </AccordionDetails>
-        <AccordionActions>
-            <Button>Cancel</Button>
-            <Button>Agree</Button>
-        </AccordionActions>
-    </Accordion>
+            </Accordion>
+        ))}
 
-
-
-
-      <button onClick={() => changeLanguage('en')}>English11</button>
-      <button onClick={() => changeLanguage('es')}>Español11</button>
+      <button onClick={() => changeLanguage('en')}>{t('faq.Accordeon1Button1')}</button>
+      <button onClick={() => changeLanguage('es')}>{t('faq.Accordeon1Button2')}</button>
 
 
 {/* <h2>Welcome JOM Peich</h2>

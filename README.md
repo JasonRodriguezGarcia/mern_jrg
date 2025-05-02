@@ -17,13 +17,13 @@
   2. jsdoc
 
 3.frontend
-  1.react
-  2.rest api
-  3.react-router-dom (Routers, ...)
-  4.gemini ai
-  5.mui
-  6.hooks
-  7.i18next react-i18next (traduccion a idiomas)
-  8.speech
-  9.bcrypt
-  10.jsonwebtoken
+  1. react
+  2. rest api
+  3. react-router-dom (Routers, ...)
+  4. gemini ai
+  5. mui
+  6. hooks
+  7. i18next react-i18next (traduccion a idiomas)
+  8. speech
+  9. bcrypt
+  10. jsonwebtoken

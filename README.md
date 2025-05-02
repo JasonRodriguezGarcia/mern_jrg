@@ -12,7 +12,7 @@
   9. /descriptions
   10. /login (desarrollando
 
-2.node.js
+2.node-js
   1. jest
   2. jsdoc
 

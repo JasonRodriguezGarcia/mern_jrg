@@ -27,3 +27,4 @@
   8. speech
   9. bcrypt
   10. jsonwebtoken
+  11. js-cookie
